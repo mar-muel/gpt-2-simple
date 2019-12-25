@@ -1,4 +1,4 @@
-tensorflow==1.14
+tensorflow-gpu==1.14
 regex
 requests
 tqdm
