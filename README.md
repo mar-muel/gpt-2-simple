@@ -10,7 +10,7 @@ pip install -r requirements.txt
 # Usage
 
 1. Parse chat logs with [Chatistics](https://github.com/MasterScrat/Chatistics)
-2. Move generated pickle files to the folder `chatistics_data_folder`
+2. Move generated pickle files to the folder `chatistics_data`
 3. Fine tune a GPT2 model
 ```
 python finetune.py --run-name run1
