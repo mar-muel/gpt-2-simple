@@ -10,14 +10,12 @@ import pickle
 import pandas as pd
 import re
 import unicodedata
+import argparse
 
 
 DATA_PATH = 'data'
 INPUT_FILE = 'input.txt'
 INPUT_PATH = os.path.join(DATA_PATH, INPUT_FILE)
-DEFAULT_RUN_NAME = 'run1'
-DEFAULT_CHATISTICS_DATA_FOLDER = os.path.join('..', 'Chatistics', 'data')
-
 
 def fine_tune(run_name, model_name='124M'):
     print(f'Run fine-tuning for run {run_name} using GPT2 model {model_name}...')
@@ -76,8 +74,14 @@ def create_input_data(chatistics_data_folder):
         f.write(text_data)
 
 def main():
-    create_input_data(DEFAULT_CHATISTICS_DATA_FOLDER)
-    fine_tune(DEFAULT_RUN_NAME)
+    parser = argparse.ArgumentParser(
+        description="Finetune GPT2 on chatlogs parsed with Chatistics"
+    )
+    parser.add_argument('-d', '--data-path', dest='data_path', help="Input data path to folder of Chatistics pickle files", default='./chatistics_data')
+    parser.add_argument('-r', '--run-name', dest='run_name', help="Run name", default='run1')
+    args = parser.parse_args()
+    create_input_data(args.data_path)
+    fine_tune(args.run_name)
 
 if __name__ == "__main__":
     main()

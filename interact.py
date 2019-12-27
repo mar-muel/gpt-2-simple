@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import numpy as np
+import argparse
 
 def interact(run_name='run1', seed=None, length=200, temperature=.8, top_k=0):
     conversation = """
@@ -45,4 +46,9 @@ bot: sure, what do you want to talk about?"""
             conversation = conversation + reply
 
 if __name__ == '__main__':
-    interact()
+    parser = argparse.ArgumentParser(description="Interact with fine tuned model")
+    parser.add_argument('-r', '--run-name', dest='run_name', help="Run name", default='run1')
+    parser.add_argument('-t', '--temperature', dest='temperature', type=float, help="Temperature", default=1)
+    parser.add_argument('--top-k', dest='top_k', type=float, help="Top k", default=0)
+    args = parser.parse_args()
+    interact(run_name=args.run_name, temperature=args.temperature, top_k=args.top_k)
